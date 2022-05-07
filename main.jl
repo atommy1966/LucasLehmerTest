@@ -6,7 +6,6 @@ function Lucas_Lehmer_Test(p)
   m = (BigInt(1)<<p) - 1
   
   for n in 2:p-1
-#    s=(BigInt(s)^2-2)%m
     s2=BigInt(s)^2
     s = (s2 & m) + (s2 >> p)
     if s >= m
