@@ -20,10 +20,11 @@ end
 #M=0
 start=Dates.now()
 for i in 3:2:50000
-    M=Lucas_Lehmer_Test(UInt(i))
+    M=Lucas_Lehmer_Test(i)
   if M==true
         println("p:",i)
-#        ans=2**i-#        println("2^p-1:",ans)        println("len(2^p-1):",len(str(ans)))
+#        ans=BigInt(2)^i-1
+#println("len(2^p-1):",len(str(ans)))
 #        println("2^p-1:",ans) 
 println("time:",Dates.now()-start)
   end
