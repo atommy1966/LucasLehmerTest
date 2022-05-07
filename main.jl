@@ -24,7 +24,7 @@ for i in 3:2:50000
   if M==true
         println("p:",i)
 #        ans=BigInt(2)^i-1
-#println("len(2^p-1):",len(str(ans)))
+#println("len(2^p-1):",length(string(ans)))
 #        println("2^p-1:",ans) 
 println("time:",Dates.now()-start)
   end
