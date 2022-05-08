@@ -1,4 +1,5 @@
 import Dates
+using Pkg
 Pkg.add("ParallelAccelerator")
 using ParallelAccelerator
 
