@@ -1,12 +1,15 @@
 import Dates
+Pkg.add("ParallelAccelerator")
+using ParallelAccelerator
+
 # creating a Dates object 
 
-function Lucas_Lehmer_Test(p)
-  s = 4 #S_0の定義
+@acc function Lucas_Lehmer_Test(p)
+  s = BigInt(4) #S_0の定義
   m = (BigInt(1)<<p) - 1
   
   for n in 2:p-1
-    s2=BigInt(s)^2
+    s2=s^2
     s = (s2 & m) + (s2 >> p)
     if s >= m
            s -= m
