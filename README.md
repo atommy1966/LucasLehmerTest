@@ -1,4 +1,4 @@
 # LucasLehmerTest
 
 This is a Lucas Lehmer Test for Julia.
-This proram provide prime of mersenne number, 2^p -1.
+This proram provides primes of mersenne number, 2^p -1.
