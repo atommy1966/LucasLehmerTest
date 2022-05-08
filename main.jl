@@ -6,7 +6,7 @@ function Lucas_Lehmer_Test(p)
   m = (BigInt(1)<<p) - 1
   
   for n in 2:p-1
-    s2=BigInt(s)^2
+    s2=BigInt(s)^Int(2)
     s = (s2 & m) + (s2 >> p)
     if s >= m
            s -= m
@@ -26,7 +26,7 @@ for i in 3:2:50000
 #        ans=BigInt(2)^i-1
 #println("len(2^p-1):",length(string(ans)))
 #        println("2^p-1:",ans) 
-println("time:",Dates.now()-start)
+    println("time:",Dates.now()-start)
   end
 end
 
