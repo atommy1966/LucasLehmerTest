@@ -6,7 +6,7 @@ function Lucas_Lehmer_Test(p)
   m = (BigInt(1)<<p) - 1
   
   for n in 2:p-1
-    s2=BigInt(s)^Int(2)
+    s2=BigInt(s)^2
     s = (s2 & m) + (s2 >> p)
     if s >= m
            s -= m
@@ -19,8 +19,11 @@ end
     
 #M=0
 start=Dates.now()
-for i in 3:2:50000
-    M=Lucas_Lehmer_Test(i)
+const first=3
+const step=2
+const last=50000
+for i in first:step:last
+  M=Lucas_Lehmer_Test(i)
   if M==true
         println("p:",i)
 #        ans=BigInt(2)^i-1
