@@ -1,11 +1,13 @@
 import Dates
-using Pkg
-Pkg.add("ParallelAccelerator")
-using ParallelAccelerator
+import Pkg
+Pkg.add("Primes")
+import Primes:isprime
+
+
 
 # creating a Dates object 
 
-@acc function Lucas_Lehmer_Test(p)
+function Lucas_Lehmer_Test(p)
   s = BigInt(4) #S_0の定義
   m = (BigInt(1)<<p) - 1
   
@@ -24,6 +26,7 @@ end
 #M=0
 start=Dates.now()
 for i in 3:2:50000
+  if isprime(i)
     M=Lucas_Lehmer_Test(i)
   if M==true
         println("p:",i)
@@ -31,6 +34,7 @@ for i in 3:2:50000
 #println("len(2^p-1):",length(string(ans)))
 #        println("2^p-1:",ans) 
 println("time:",Dates.now()-start)
+  end
   end
 end
 
