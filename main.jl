@@ -1,14 +1,14 @@
 import Dates
 import Pkg
 Pkg.add("Primes")
-import Primes:isprime
+import Primes:isprime,primes
 
 
 
 # creating a Dates object 
 
 function Lucas_Lehmer_Test(p)
-  s = BigInt(4) #S_0の定義
+  s = 4 #S_0の定義
   m = (BigInt(1)<<p) - 1
   
   for n in 2:p-1
@@ -25,16 +25,14 @@ end
     
 #M=0
 start=Dates.now()
-for i in 3:2:50000
-  if isprime(i)
-    M=Lucas_Lehmer_Test(i)
+for p in primes(3,200000)
+    M=Lucas_Lehmer_Test(p)
   if M==true
-        println("p:",i)
-#        ans=BigInt(2)^i-1
-#println("len(2^p-1):",length(string(ans)))
+        println("p:",p)
+        ans=BigInt(2)^p-1
+println("len(2^p-1):",length(string(ans)))
 #        println("2^p-1:",ans) 
 println("time:",Dates.now()-start)
-  end
   end
 end
 
