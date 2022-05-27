@@ -1,11 +1,12 @@
-import Dates
-import Pkg
-Pkg.add("Primes")
-import Primes:isprime,primes
-
+@everywhere import Dates
+@everywhere import Pkg
+@everywhere Pkg.add("Primes")
+@everywhere import Primes:isprime,primes
+using Base.Threads
+using SharedArrays
 
 # creating a Dates object 
-function Lucas_Lehmer_Test(p)
+@everywhere function Lucas_Lehmer_Test(p)
   s = 4 #S_0の定義
   m = (BigInt(1)<<p) - 1
   
@@ -17,20 +18,19 @@ function Lucas_Lehmer_Test(p)
     end
     s -= 2
   end
-  return s==0
-end
-
-    
-#M=0
-start=Dates.now()
-@inbounds @simd for p in primes(3,200000)
-    M=Lucas_Lehmer_Test(p)
-  if M==true
+  if s==0
         println("p:",p)
         ans=BigInt(2)^p-1
         println("len(2^p-1):",length(string(ans)))
 #        println("2^p-1:",ans) 
         println("time:",Dates.now()-start)
   end
-end
+  return s==0
+end 
 
+start=Dates.now()
+#pm=primes(3,100)
+@inbounds for p in primes(3,100)
+    M=@spawn Lucas_Lehmer_Test(p)
+end
+#pmap(Lucas_Lehmer_Test,primes(3,100))
