@@ -3,18 +3,21 @@ import Pkg
 Pkg.add("Primes")
 import Primes:isprime,primes
 
-# creating a Dates object 
-function Lucas_Lehmer_Test(p)
-  s = 4 #S_0の定義
-  m = (BigInt(1)<<p) - 1
-  
-  @inbounds @simd for _ in 2:p-1
+function sub(s::BigInt,m::BigInt,p::Int)
     s2=s^2
     s = (s2 & m) + (s2 >> p)
     if s >= m
            s -= m
     end
     s -= 2
+end
+
+function Lucas_Lehmer_Test(p::Int)
+  s = BigInt(4) #S_0の定義
+  m = (BigInt(1)<<p) - 1
+  
+  @inbounds @simd for _ in 2:p-1
+    s=sub(s,m,p)
   end
   return s==0
 end
@@ -23,7 +26,7 @@ end
 #M=0
 startNumber=3
 endNumber=1000000
-p=startNumber
+#p=startNumber
 @inbounds @simd for p in primes(startNumber,endNumber)
   start=Dates.now()
     M=Lucas_Lehmer_Test(p)
